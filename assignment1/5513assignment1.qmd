@@ -58,3 +58,42 @@ data %>%
   kable(caption = "Table:Describe the statistical characteristics of the two variables")
 ```
 Table lists the statistical summary of these two variables, including the minimum, mean, and maximum values. As shown in the table, the average marketing spend is 139.42, and the average purchase amount is 116.32. These figures provide a basic background for the analysis.
+
+### Result
+
+```{r}
+lm <- lm(formula = purchase_amount ~ marketing_spend, data =data)
+summary(lm)
+```
+
+The results of this study clearly answer the core research question: higher marketing spend leads to higher purchase amount for customers.
+
+```{r}
+#| label: fig-1
+#| fig-cap: "marketing spend per customer VS purchase amount"
+library(ggplot2)
+ggplot(data,aes(x = marketing_spend, y = purchase_amount)) +
+  geom_point(size = 1) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "The Relationship Between marketing spend per customer and purchase amount",
+       x = "marketing spend per customer", y = "purchase amount")
+```
+
+[@fig-1], a scatter plot with a fitted line, visually shows a clear positive correlation between marketing spend and purchase amount. Linear regression results confirm this: for every 1-unit increase in marketing spend, purchase amount increases by an average of 0.66, and this result is highly statistically significant (p\<0.001). The model explains nearly 60% of the variation in purchase amount.
+
+```{r}
+#| label: fig-2
+#| fig-cap: "marketing spend per customer VS purchase amount"
+ggplot(data, aes(x = marketing_spend, y = purchase_amount,
+                     fill = segment)) +
+  geom_boxplot() +
+  labs(
+    title = "The Relationship Between marketing spend per customer and purchase amount",
+    x = "marketing spend per customer",
+    y = "purchase amount"
+  )
+```
+
+[@fig-2] , the boxplot further shows that across different customer segments, groups with higher marketing spend also have generally higher purchase amounts, and this pattern holds for all customer groups.
+
+Overall, the data fully proves that increasing marketing investment in customers can effectively improve their purchase amount.
