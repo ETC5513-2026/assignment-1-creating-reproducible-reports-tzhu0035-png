@@ -38,3 +38,15 @@ names(data)
 str(data)
 ```
 The data contains `r nrow(data)` rows and `r ncol(data)` columns. And it contains `r names(data)` 7 variables. The cleaned dataset retains `r nrow(data)` valid observations with complete variable counts, which can be directly used for subsequent statistical analysis and data visualization. All variables have undergone data type verification and missing value cleaning. Specifically, marketing_spend (marketing expenditure) and purchase_amount (purchase amount) are numerical variables, while segment (customer segment) is a character variable.
+
+```{r}
+ggplot(data, aes(x = marketing_spend)) +
+  geom_histogram(binwidth = 20, fill = "steelblue", colour = "white") +
+  labs(title = "Distribution of marketing spend",
+       x = "marketing spend", y = "Count")
+ggplot(data, aes(x = purchase_amount)) +
+  geom_histogram(binwidth = 20, fill = "steelblue", colour = "white") +
+  labs(title = "Distribution of purchase amount",
+       x = "purchase amount", y = "Count")
+```
+Figure 1 shows the histogram of marketing spend, and Figure 2 shows the histogram of purchase amount. Both figures indicate that the values of the two variables are concentrated in the 0-200 range, with an overall right-skewed distribution. This suggests that most customers have moderate marketing investment and purchase amounts, while a small number of customers have high investment and consumption, providing a data background for the subsequent correlation analysis.
