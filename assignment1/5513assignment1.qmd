@@ -14,3 +14,6 @@ editor:
 
 This report examines the relationship between marketing spending and customer purchases.I want to find out if higher marketing expenditure leads to more customer spending.This data comes from a personalized marketing campaign in the past quarter.The analysis will help businesses create more effective marketing strategies.
 
+### Research Question
+
+The core research question of this report is: Does higher marketing spend lead to higher purchase amount for customers? I will analyze the correlation between marketing investment and customer spending behavior using this dataset.I will also further examine whether there are differences in marketing effectiveness across different customer segments.
