@@ -1,0 +1,16 @@
+---
+title: "5513assignment 1"
+author: "Tiansi Zhu"
+format:
+    html: default
+    pdf: default
+subtitle: "student id:35742305"
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+### Introduction
+
+This report examines the relationship between marketing spending and customer purchases.I want to find out if higher marketing expenditure leads to more customer spending.This data comes from a personalized marketing campaign in the past quarter.The analysis will help businesses create more effective marketing strategies.
+
