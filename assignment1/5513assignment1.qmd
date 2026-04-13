@@ -50,3 +50,11 @@ ggplot(data, aes(x = purchase_amount)) +
        x = "purchase amount", y = "Count")
 ```
 Figure 1 shows the histogram of marketing spend, and Figure 2 shows the histogram of purchase amount. Both figures indicate that the values of the two variables are concentrated in the 0-200 range, with an overall right-skewed distribution. This suggests that most customers have moderate marketing investment and purchase amounts, while a small number of customers have high investment and consumption, providing a data background for the subsequent correlation analysis.
+```{r}
+library(knitr)
+data %>% 
+  select(marketing_spend,purchase_amount, visits) %>% 
+  summary() %>% 
+  kable(caption = "Table:Describe the statistical characteristics of the two variables")
+```
+Table lists the statistical summary of these two variables, including the minimum, mean, and maximum values. As shown in the table, the average marketing spend is 139.42, and the average purchase amount is 116.32. These figures provide a basic background for the analysis.
