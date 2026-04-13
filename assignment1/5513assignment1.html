@@ -92,29 +92,8 @@ ul.task-list li input[type="checkbox"] {
 <pre><code>[1] "customer_id"     "signup_date"     "marketing_spend" "visits"         
 [5] "purchase_amount" "segment"         "notes"          </code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>spc_tbl_ [132 × 7] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
- $ customer_id    : chr [1:132] "35742305_c0001" "35742305_c0002" "35742305_c0003" "35742305_c0005" ...
- $ signup_date    : chr [1:132] "13/08/2025" "2025-10-28" "2025-03-25" "2025-03-21" ...
- $ marketing_spend: num [1:132] 128.27 126.09 4.28 270.18 156.86 ...
- $ visits         : num [1:132] 5 9 1 10 7 0 4 1 3 2 ...
- $ purchase_amount: num [1:132] 157.6 86.5 0 224.4 131.6 ...
- $ segment        : chr [1:132] "SMB" "Enterprise" "Consumer" "Enterprise" ...
- $ notes          : chr [1:132] "contacted" NA NA NA ...
- - attr(*, "spec")=
-  .. cols(
-  ..   customer_id = col_character(),
-  ..   signup_date = col_character(),
-  ..   marketing_spend = col_double(),
-  ..   visits = col_double(),
-  ..   purchase_amount = col_double(),
-  ..   segment = col_character(),
-  ..   notes = col_character()
-  .. )
- - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
 </div>
-</div>
-<p>The data contains 132 rows and 7 columns. And it contains customer_id, signup_date, marketing_spend, visits, purchase_amount, segment, notes 7 variables. The cleaned dataset retains 132 valid observations with complete variable counts, which can be directly used for subsequent statistical analysis and data visualization. All variables have undergone data type verification and missing value cleaning. Specifically, marketing_spend (marketing expenditure) and purchase_amount (purchase amount) are numerical variables, while segment (customer segment) is a character variable.</p>
+<p>The data contains 132 rows and 7 columns. And it contains customer_id, signup_date, marketing_spend, visits, purchase_amount, segment, notes 7 variables. The cleaned dataset retains 132 valid observations with complete variable counts, which can be directly used for subsequent statistical analysis and data visualization. All variables have undergone data type verification and missing value cleaning. Specifically, marketing_spend (marketing spend) and purchase_amount (purchase amount) are numerical variables, while segment (customer segment) is a character variable.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
