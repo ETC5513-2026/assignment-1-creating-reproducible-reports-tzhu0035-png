@@ -37,3 +37,4 @@ dim(data)
 names(data)
 str(data)
 ```
+The data contains `r nrow(data)` rows and `r ncol(data)` columns. And it contains `r names(data)` 7 variables. The cleaned dataset retains `r nrow(data)` valid observations with complete variable counts, which can be directly used for subsequent statistical analysis and data visualization. All variables have undergone data type verification and missing value cleaning. Specifically, marketing_spend (marketing expenditure) and purchase_amount (purchase amount) are numerical variables, while segment (customer segment) is a character variable.
