@@ -1,0 +1,137 @@
+---
+title: "Untitled"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+### Research Question
+
+The core research question of this report is: Does higher marketing spend lead to higher purchase amount for customers? I will analyze the correlation between marketing investment and customer spending behavior using this dataset.I will also further examine whether there are differences in marketing effectiveness across different customer segments.
+
+```{r}
+#| echo: false
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, error = FALSE )
+```
+
+### Dataset Introduction
+
+This dataset comes from the personalized marketing records of an online retailer, with 150 customer samples.It covers key fields like customer ID, signup date, marketing spend, visits, purchase amount, and customer segment.Missing values in the purchase amount variable were removed during data cleaning.The cleaned dataset is neat and complete, which is enough for us to analyze the relationship between marketing investment and consumption performance.
+
+```{r}
+library(tidyverse)
+library(here)
+data1 <- read_csv(here::here("data", "35742305_Tiansi Zhu.csv")) 
+data <- data1 %>% 
+ filter(!is.na(data1$purchase_amount))
+dim(data)
+names(data)
+str(data)
+```
+
+The data contains `r nrow(data)` rows and `r ncol(data)` columns. And it contains `r names(data)` 7 variables. The cleaned dataset retains `r nrow(data)` valid observations with complete variable counts, which can be directly used for subsequent statistical analysis and data visualization. All variables have undergone data type verification and missing value cleaning. Specifically, marketing_spend (marketing expenditure) and purchase_amount (purchase amount) are numerical variables, while segment (customer segment) is a character variable.
+
+```{r}
+ggplot(data, aes(x = marketing_spend)) +
+  geom_histogram(binwidth = 20, fill = "steelblue", colour = "white") +
+  labs(title = "Distribution of marketing spend",
+       x = "marketing spend", y = "Count")
+ggplot(data, aes(x = purchase_amount)) +
+  geom_histogram(binwidth = 20, fill = "steelblue", colour = "white") +
+  labs(title = "Distribution of purchase amount",
+       x = "purchase amount", y = "Count")
+```
+
+```{r}
+#| label: tbl-data-summary
+#| tbl-cap: "Summary of the data."
+summary<- data %>%
+  summarise(
+    mean_marketing  = mean(marketing_spend, na.rm = TRUE),
+    median_marketing= median(marketing_spend, na.rm = TRUE),
+    max_marketing   = max(marketing_spend, na.rm = TRUE),
+    min_marketing   = min(marketing_spend, na.rm = TRUE),
+    sd_marketing    = sd(marketing_spend, na.rm = TRUE),
+    mean_visits     = mean(visits, na.rm = TRUE),
+    median_visits   = median(visits, na.rm = TRUE),
+    max_visits      = max(visits, na.rm = TRUE),
+    min_visits      = min(visits, na.rm = TRUE),
+    sd_visits       = sd(visits, na.rm = TRUE),
+    mean_purchase   = mean(purchase_amount, na.rm = TRUE),
+    median_purchase = median(purchase_amount, na.rm = TRUE),
+    max_purchase    = max(purchase_amount, na.rm = TRUE),
+    min_purchase    = min(purchase_amount, na.rm = TRUE),
+    sd_purchase     = sd(purchase_amount, na.rm = TRUE)
+  ) 
+  table <- summary %>% 
+pivot_longer(
+  cols = everything(),
+  names_to = "stat_var",
+  values_to = "value"
+) 
+    mutate(
+      str <- str_split(table$stat_var, "_")) 
+      
+ 
+```
+
+@tbl-data-summary shows
+
+### Result
+
+```{r}
+lm <- lm(formula = purchase_amount ~ marketing_spend, data =data)
+summary(lm)
+```
+
+The results of this study clearly answer the core research question: higher marketing spend leads to higher purchase amount for customers.
+
+```{r}
+#| label: fig-1
+#| fig-cap: "marketing spend per customer VS purchase amount"
+library(ggplot2)
+ggplot(data,aes(x = marketing_spend, y = purchase_amount)) +
+  geom_point(size = 1) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "The Relationship Between marketing spend per customer and purchase amount",
+       x = "marketing spend per customer", y = "purchase amount")
+```
+
+[@fig-1], a scatter plot with a fitted line, visually shows a clear positive correlation between marketing spend and purchase amount. Linear regression results confirm this: for every 1-unit increase in marketing spend, purchase amount increases by an average of 0.66, and this result is highly statistically significant (p\<0.001). The model explains nearly 60% of the variation in purchase amount.
+
+```{r}
+#| label: fig-2
+#| fig-cap: "marketing spend per customer VS purchase amount"
+ggplot(data, aes(x = marketing_spend, y = purchase_amount,
+                     fill = segment)) +
+  geom_boxplot() +
+  labs(
+    title = "The Relationship Between marketing spend per customer and purchase amount",
+    x = "marketing spend per customer",
+    y = "purchase amount"
+  )
+```
+
+[@fig-2] , the boxplot further shows that across different customer segments, groups with higher marketing spend also have generally higher purchase amounts, and this pattern holds for all customer groups.
+
+Overall, the data fully proves that increasing marketing investment in customers can effectively improve their purchase amount.
